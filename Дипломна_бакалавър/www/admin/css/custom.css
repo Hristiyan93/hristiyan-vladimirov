@@ -1,0 +1,21 @@
+/**
+ *
+ * Apply Here your Custom CSS
+ *
+*/
+
+body {
+	
+}
+
+label.error{
+	color: #cc2424;
+}
+
+.duration{
+	text-align: right;
+}
+
+.price{
+	text-align: right;
+}

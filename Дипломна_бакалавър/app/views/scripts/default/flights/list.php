@@ -1,0 +1,1 @@
+<?php echo $this->partial('default/flights/list/' . $this->viewTemplate . '-view.php', $this)?>

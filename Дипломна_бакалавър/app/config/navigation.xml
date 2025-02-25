@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+    <nav>
+        <label>Home</label>
+        <module>admin</module>
+        <controller>dashboard</controller>
+        <action>index</action>
+        <pages>
+        	<flights>
+        		<label>Flights</label>
+        		<module>admin</module>
+     			<controller>flights</controller>
+     			<action>index</action>
+     			<class>entypo-flight</class>
+        		<pages>
+        			<view>
+        				<label>View Flights</label>
+        				<module>admin</module>
+        				<controller>flights</controller>
+        				<action>index</action>
+        				<class>entypo-menu</class>
+        				<pages>
+        					<add>
+		        				<label>Add Flight</label>
+		        				<module>admin</module>
+		        				<controller>flights</controller>
+		        				<action>add</action>
+		        				<class>entypo-plus-circled</class>
+		        			</add>
+        				</pages>
+        			</view>
+        			<add>
+        				<label>Add Flight</label>
+        				<module>admin</module>
+        				<controller>flights</controller>
+        				<action>add</action>
+        				<class>entypo-plus-circled</class>
+        			</add>
+        			<airlines>
+        				<label>View Airlines</label>
+        				<module>admin</module>
+        				<controller>airlines</controller>
+        				<action>index</action>
+        				<class>entypo-menu</class>
+        				<pages>
+	        				<airlines-add>
+		        				<label>Add Airline</label>
+		        				<module>admin</module>
+		        				<controller>airlines</controller>
+		        				<action>add</action>
+		        				<class>entypo-plus-circled</class>
+		        			</airlines-add>
+        				</pages>
+        			</airlines>
+        			<airlines-add>
+        				<label>Add Airline</label>
+        				<module>admin</module>
+        				<controller>airlines</controller>
+        				<action>add</action>
+        				<class>entypo-plus-circled</class>
+        			</airlines-add>
+        			<airports>
+        				<label>View Airports</label>
+        				<module>admin</module>
+        				<controller>airports</controller>
+        				<action>index</action>
+        				<class>entypo-menu</class>
+        				<pages>
+        					<airports-add>
+		        				<label>Add Airports</label>
+		        				<module>admin</module>
+		        				<controller>airports</controller>
+		        				<action>add</action>
+		        				<class>entypo-plus-circled</class>
+        					</airports-add>
+        				</pages>
+        			</airports>
+        			<airports-add>
+        				<label>Add Airports</label>
+        				<module>admin</module>
+        				<controller>airports</controller>
+        				<action>add</action>
+        				<class>entypo-plus-circled</class>
+        			</airports-add>
+        			<features>
+        				<label>Inflight Features</label>
+        				<module>admin</module>
+        				<controller>features</controller>
+        				<action>index</action>
+        				<class>entypo-menu</class>
+        				<pages>
+        					<features-add>
+		        				<label>Add Inflight Feature</label>
+		        				<module>admin</module>
+		        				<controller>features</controller>
+		        				<action>add</action>
+		        				<class>entypo-plus-circled</class>
+		        			</features-add>
+        				</pages>
+        			</features>
+        			<features-add>
+        				<label>Add Inflight Feature</label>
+        				<module>admin</module>
+        				<controller>features</controller>
+        				<action>add</action>
+        				<class>entypo-plus-circled</class>
+        			</features-add>
+        		</pages>
+        	</flights>
+        	<Bookings>
+        		<label>Bookings</label>
+        		<module>admin</module>
+     			<controller>routes</controller>
+     			<action>index</action>
+     			<class>entypo-suitcase</class>
+        		<pages>
+        			<routes>
+        				<label>View Destinations</label>
+        				<module>admin</module>
+        				<controller>routes</controller>
+        				<action>index</action>
+        				<class>entypo-briefcase</class>
+        			</routes>
+        			<bookings>
+        				<label>View Bookings</label>
+        				<module>admin</module>
+        				<controller>bookings</controller>
+        				<action>index</action>
+        				<class>entypo-basket</class>
+        			</bookings>
+        			<contacts>
+        				<label>View Contacts</label>
+        				<module>admin</module>
+        				<controller>contacts</controller>
+        				<action>index</action>
+        				<class>entypo-vcard</class>
+        			</contacts>
+        		</pages>
+        	</Bookings>
+        	<blog>
+        		<label>BLog</label>
+        		<module>admin</module>
+     			<controller>blog</controller>
+     			<action>index</action>
+     			<class>entypo-book-open</class>
+        		<pages>
+        			<view>
+        				<label>View Posts</label>
+        				<module>admin</module>
+        				<controller>blog</controller>
+        				<action>index</action>
+        				<class>entypo-menu</class>
+        			</view>
+        			<add>
+        				<label>Add Post</label>
+        				<module>admin</module>
+        				<controller>blog</controller>
+        				<action>add</action>
+        				<class>entypo-plus-circled</class>
+        			</add>
+        		</pages>
+        	</blog>
+        	<users>
+        		<label>Users</label>
+        		<module>admin</module>
+     			<controller>users</controller>
+     			<action>index</action>
+     			<class>entypo-users</class>
+        		<pages>
+        			<view>
+        				<label>View Users</label>
+        				<module>admin</module>
+        				<controller>users</controller>
+        				<action>list</action>
+        				<class>entypo-menu</class>
+        			</view>
+        			<add>
+        				<label>Add User</label>
+        				<module>admin</module>
+        				<controller>users</controller>
+        				<action>add</action>
+        				<class>entypo-plus-circled</class>
+        			</add>
+        		</pages>
+        	</users>
+        </pages>
+    </nav>
+</configdata>
