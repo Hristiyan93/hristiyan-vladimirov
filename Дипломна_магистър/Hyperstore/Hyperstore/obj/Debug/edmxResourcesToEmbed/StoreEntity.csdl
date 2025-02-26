@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="hypermarketModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="hypermarketEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="departments" EntityType="hypermarketModel.department" />
+    <EntitySet Name="statuses" EntityType="hypermarketModel.status" />
+    <EntitySet Name="users" EntityType="hypermarketModel.user" />
+    <EntitySet Name="usertypes" EntityType="hypermarketModel.usertype" />
+    <AssociationSet Name="departmentuser" Association="hypermarketModel.departmentuser">
+      <End Role="department" EntitySet="departments" />
+      <End Role="user" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="usertypeuser" Association="hypermarketModel.usertypeuser">
+      <End Role="usertype" EntitySet="usertypes" />
+      <End Role="user" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="statususer" Association="hypermarketModel.statususer">
+      <End Role="status" EntitySet="statuses" />
+      <End Role="user" EntitySet="users" />
+    </AssociationSet>
+    <EntitySet Name="products" EntityType="hypermarketModel.product" />
+    <EntitySet Name="stocks1" EntityType="hypermarketModel.stock" />
+    <EntitySet Name="vendors" EntityType="hypermarketModel.vendor" />
+    <AssociationSet Name="FK_products_ToVendors" Association="hypermarketModel.FK_products_ToVendors">
+      <End Role="vendor" EntitySet="vendors" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="departmentstock" Association="hypermarketModel.departmentstock">
+      <End Role="department" EntitySet="departments" />
+      <End Role="stock" EntitySet="stocks1" />
+    </AssociationSet>
+    <AssociationSet Name="productstock" Association="hypermarketModel.productstock">
+      <End Role="product" EntitySet="products" />
+      <End Role="stock" EntitySet="stocks1" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="departmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="users" Relationship="hypermarketModel.departmentuser" FromRole="department" ToRole="user" />
+    <NavigationProperty Name="stocks" Relationship="hypermarketModel.departmentstock" FromRole="department" ToRole="stock" />
+  </EntityType>
+  <EntityType Name="status">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="users" Relationship="hypermarketModel.statususer" FromRole="status" ToRole="user" />
+  </EntityType>
+  <EntityType Name="user">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="department" Relationship="hypermarketModel.departmentuser" FromRole="user" ToRole="department" />
+    <NavigationProperty Name="usertype" Relationship="hypermarketModel.usertypeuser" FromRole="user" ToRole="usertype" />
+    <NavigationProperty Name="status" Relationship="hypermarketModel.statususer" FromRole="user" ToRole="status" />
+  </EntityType>
+  <EntityType Name="usertype">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="users" Relationship="hypermarketModel.usertypeuser" FromRole="usertype" ToRole="user" />
+  </EntityType>
+  <Association Name="departmentuser">
+    <End Type="hypermarketModel.department" Role="department" Multiplicity="0..1" />
+    <End Type="hypermarketModel.user" Role="user" Multiplicity="*" />
+  </Association>
+  <Association Name="usertypeuser">
+    <End Type="hypermarketModel.usertype" Role="usertype" Multiplicity="1" />
+    <End Type="hypermarketModel.user" Role="user" Multiplicity="*" />
+  </Association>
+  <Association Name="statususer">
+    <End Type="hypermarketModel.status" Role="status" Multiplicity="1" />
+    <End Type="hypermarketModel.user" Role="user" Multiplicity="*" />
+  </Association>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="vendor" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="barcode" Type="String" MaxLength="15" FixedLength="true" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="vendor1" Relationship="hypermarketModel.FK_products_ToVendors" FromRole="product" ToRole="vendor" />
+    <NavigationProperty Name="stocks" Relationship="hypermarketModel.productstock" FromRole="product" ToRole="stock" />
+  </EntityType>
+  <EntityType Name="stock">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="qty" Type="Int32" />
+    <NavigationProperty Name="department" Relationship="hypermarketModel.departmentstock" FromRole="stock" ToRole="department" />
+    <NavigationProperty Name="product" Relationship="hypermarketModel.productstock" FromRole="stock" ToRole="product" />
+  </EntityType>
+  <EntityType Name="vendor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="products" Relationship="hypermarketModel.FK_products_ToVendors" FromRole="vendor" ToRole="product" />
+  </EntityType>
+  <Association Name="FK_products_ToVendors">
+    <End Type="hypermarketModel.vendor" Role="vendor" Multiplicity="0..1" />
+    <End Type="hypermarketModel.product" Role="product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vendor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="vendor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="departmentstock">
+    <End Type="hypermarketModel.department" Role="department" Multiplicity="1" />
+    <End Type="hypermarketModel.stock" Role="stock" Multiplicity="*" />
+  </Association>
+  <Association Name="productstock">
+    <End Type="hypermarketModel.product" Role="product" Multiplicity="1" />
+    <End Type="hypermarketModel.stock" Role="stock" Multiplicity="*" />
+  </Association>
+</Schema>

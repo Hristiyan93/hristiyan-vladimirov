@@ -1,0 +1,1696 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HyperStoreApp.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" />
+          <Property Name="discountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="departmentName" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="barcode" Type="nchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Discounts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="discountValue" Type="float" />
+        </EntityType>
+        <EntityType Name="ForgottenPasswords">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="accountId" Type="int" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Inventories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="employeeId" Type="int" Nullable="false" />
+          <Property Name="departmentId" Type="int" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InventoryDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="inventoryId" Type="int" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="qtyInStock" Type="int" Nullable="false" />
+          <Property Name="qtyActual" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InventoryStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="orderId" Type="int" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="price" Type="float" />
+          <Property Name="qtyOrdered" Type="int" />
+          <Property Name="qtyReceived" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="employeeId" Type="int" Nullable="false" />
+          <Property Name="departmentId" Type="int" Nullable="false" />
+          <Property Name="totalCost" Type="float" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vendorId" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="barcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="ntext" />
+          <Property Name="priceSell" Type="float" />
+          <Property Name="priceBuy" Type="float" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sales">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="employeeId" Type="int" Nullable="false" />
+          <Property Name="customerId" Type="int" Nullable="false" />
+          <Property Name="departmentId" Type="int" Nullable="false" />
+          <Property Name="totalCost" Type="float" />
+          <Property Name="discount" Type="int" />
+          <Property Name="discountCost" Type="float" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SalesDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="saleId" Type="int" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="price" Type="float" />
+          <Property Name="qty" Type="int" />
+        </EntityType>
+        <EntityType Name="SaleStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Stocks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="productId" Type="int" Nullable="false" />
+          <Property Name="departmentId" Type="int" Nullable="false" />
+          <Property Name="qty" Type="int" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="departmentId" Type="int" Nullable="false" />
+          <Property Name="usertypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usertypes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Vendors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hypermarket.dbo.CustomersList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CustomersList">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="50" />
+          <Property Name="discountId" Type="int" Nullable="false" />
+          <Property Name="discountValue" Type="float" />
+          <Property Name="DiscountName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hypermarket.dbo.ProductsList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProductsList">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="vendorId" />
+            <PropertyRef Name="RowVersion" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="vendorId" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="barcode" Type="nvarchar" MaxLength="50" />
+          <Property Name="description" Type="ntext" />
+          <Property Name="priceSell" Type="float" />
+          <Property Name="priceBuy" Type="float" />
+          <Property Name="RowVersion" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="vendorName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hypermarket.dbo.UsersList' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UsersList">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="statusId" />
+            <PropertyRef Name="departmentId" />
+            <PropertyRef Name="usertypeId" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="fullname" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="departmentId" Type="int" Nullable="false" />
+          <Property Name="usertypeId" Type="int" Nullable="false" />
+          <Property Name="StatusName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="departmentName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Customers_ToDiscounts">
+          <End Role="Discounts" Type="Self.Discounts" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discounts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="discountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ForgottenPasswords_ToUsers">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ForgottenPasswords" Type="Self.ForgottenPasswords" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ForgottenPasswords">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventories_ToDepartments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Inventories" Type="Self.Inventories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inventories">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventories_ToStatus">
+          <End Role="InventoryStatuses" Type="Self.InventoryStatuses" Multiplicity="1" />
+          <End Role="Inventories" Type="Self.Inventories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inventories">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventories_ToUsers">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Inventories" Type="Self.Inventories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inventories">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryDetails_ToInventories">
+          <End Role="Inventories" Type="Self.Inventories" Multiplicity="1" />
+          <End Role="InventoryDetails" Type="Self.InventoryDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryDetails">
+              <PropertyRef Name="inventoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryDetails_ToProducts">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="InventoryDetails" Type="Self.InventoryDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryDetails">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_ToOrders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_ToProducts">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToDepartments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToStatuses">
+          <End Role="OrderStatuses" Type="Self.OrderStatuses" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToUsers">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_products_ToVendors">
+          <End Role="Vendors" Type="Self.Vendors" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="vendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_ToCustomers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_ToDepartments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_ToStatuses">
+          <End Role="SaleStatuses" Type="Self.SaleStatuses" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SaleStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_ToUsers">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Sales" Type="Self.Sales" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sales">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesDetails_ToProducts">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="SalesDetails" Type="Self.SalesDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesDetails">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesDetails_ToSales">
+          <End Role="Sales" Type="Self.Sales" Multiplicity="1" />
+          <End Role="SalesDetails" Type="Self.SalesDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sales">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesDetails">
+              <PropertyRef Name="saleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stocks_ToDepartments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Stocks" Type="Self.Stocks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stocks">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stocks_ToProducts">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Stocks" Type="Self.Stocks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stocks">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_ToDepartments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_ToStatuses">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_ToUsertypes">
+          <End Role="Usertypes" Type="Self.Usertypes" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usertypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="usertypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Sp_GetOrderByDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="departmentId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="HyperStoreAppStoreContainer">
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ForgottenPasswords" EntityType="Self.ForgottenPasswords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventories" EntityType="Self.Inventories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryDetails" EntityType="Self.InventoryDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InventoryStatuses" EntityType="Self.InventoryStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatuses" EntityType="Self.OrderStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesDetails" EntityType="Self.SalesDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SaleStatuses" EntityType="Self.SaleStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stocks" EntityType="Self.Stocks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usertypes" EntityType="Self.Usertypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomersList" EntityType="Self.CustomersList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CustomersList].[Id] AS [Id], 
+    [CustomersList].[name] AS [name], 
+    [CustomersList].[phone] AS [phone], 
+    [CustomersList].[email] AS [email], 
+    [CustomersList].[address] AS [address], 
+    [CustomersList].[discountId] AS [discountId], 
+    [CustomersList].[discountValue] AS [discountValue], 
+    [CustomersList].[DiscountName] AS [DiscountName]
+    FROM [dbo].[CustomersList] AS [CustomersList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProductsList" EntityType="Self.ProductsList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProductsList].[Id] AS [Id], 
+    [ProductsList].[vendorId] AS [vendorId], 
+    [ProductsList].[name] AS [name], 
+    [ProductsList].[barcode] AS [barcode], 
+    [ProductsList].[description] AS [description], 
+    [ProductsList].[priceSell] AS [priceSell], 
+    [ProductsList].[priceBuy] AS [priceBuy], 
+    [ProductsList].[RowVersion] AS [RowVersion], 
+    [ProductsList].[vendorName] AS [vendorName]
+    FROM [dbo].[ProductsList] AS [ProductsList]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UsersList" EntityType="Self.UsersList" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UsersList].[id] AS [id], 
+    [UsersList].[username] AS [username], 
+    [UsersList].[password] AS [password], 
+    [UsersList].[fullname] AS [fullname], 
+    [UsersList].[email] AS [email], 
+    [UsersList].[phone] AS [phone], 
+    [UsersList].[address] AS [address], 
+    [UsersList].[statusId] AS [statusId], 
+    [UsersList].[departmentId] AS [departmentId], 
+    [UsersList].[usertypeId] AS [usertypeId], 
+    [UsersList].[StatusName] AS [StatusName], 
+    [UsersList].[TypeName] AS [TypeName], 
+    [UsersList].[departmentName] AS [departmentName]
+    FROM [dbo].[UsersList] AS [UsersList]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Customers_ToDiscounts" Association="Self.FK_Customers_ToDiscounts">
+            <End Role="Discounts" EntitySet="Discounts" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ForgottenPasswords_ToUsers" Association="Self.FK_ForgottenPasswords_ToUsers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ForgottenPasswords" EntitySet="ForgottenPasswords" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventories_ToDepartments" Association="Self.FK_Inventories_ToDepartments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Inventories" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventories_ToStatus" Association="Self.FK_Inventories_ToStatus">
+            <End Role="InventoryStatuses" EntitySet="InventoryStatuses" />
+            <End Role="Inventories" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventories_ToUsers" Association="Self.FK_Inventories_ToUsers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Inventories" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryDetails_ToInventories" Association="Self.FK_InventoryDetails_ToInventories">
+            <End Role="Inventories" EntitySet="Inventories" />
+            <End Role="InventoryDetails" EntitySet="InventoryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryDetails_ToProducts" Association="Self.FK_InventoryDetails_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="InventoryDetails" EntitySet="InventoryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_ToOrders" Association="Self.FK_OrderDetails_ToOrders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_ToProducts" Association="Self.FK_OrderDetails_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToDepartments" Association="Self.FK_Orders_ToDepartments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToStatuses" Association="Self.FK_Orders_ToStatuses">
+            <End Role="OrderStatuses" EntitySet="OrderStatuses" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToUsers" Association="Self.FK_Orders_ToUsers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_products_ToVendors" Association="Self.FK_products_ToVendors">
+            <End Role="Vendors" EntitySet="Vendors" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_ToCustomers" Association="Self.FK_Sales_ToCustomers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_ToDepartments" Association="Self.FK_Sales_ToDepartments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_ToStatuses" Association="Self.FK_Sales_ToStatuses">
+            <End Role="SaleStatuses" EntitySet="SaleStatuses" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_ToUsers" Association="Self.FK_Sales_ToUsers">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Sales" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesDetails_ToProducts" Association="Self.FK_SalesDetails_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="SalesDetails" EntitySet="SalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesDetails_ToSales" Association="Self.FK_SalesDetails_ToSales">
+            <End Role="Sales" EntitySet="Sales" />
+            <End Role="SalesDetails" EntitySet="SalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stocks_ToDepartments" Association="Self.FK_Stocks_ToDepartments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Stocks" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stocks_ToProducts" Association="Self.FK_Stocks_ToProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Stocks" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_ToDepartments" Association="Self.FK_users_ToDepartments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_ToStatuses" Association="Self.FK_users_ToStatuses">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_ToUsertypes" Association="Self.FK_users_ToUsertypes">
+            <End Role="Usertypes" EntitySet="Usertypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HyperStoreApp" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="departmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="barcode" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Stocks" Relationship="Self.FK_Stocks_ToDepartments" FromRole="Departments" ToRole="Stocks" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_users_ToDepartments" FromRole="Departments" ToRole="Users" />
+          <NavigationProperty Name="Inventories" Relationship="HyperStoreApp.FK_Inventories_ToDepartments" FromRole="Department" ToRole="Inventory" />
+          <NavigationProperty Name="Sales" Relationship="HyperStoreApp.FK_Sales_ToDepartments" FromRole="Department" ToRole="Sale" />
+          <NavigationProperty Name="Orders" Relationship="HyperStoreApp.FK_Orders_ToDepartments" FromRole="Department" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_users_ToStatuses" FromRole="Statuses" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Stock">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="departmentId" Type="Int32" Nullable="false" />
+          <Property Name="qty" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Stocks_ToDepartments" FromRole="Stocks" ToRole="Departments" />
+          <NavigationProperty Name="Product" Relationship="HyperStoreApp.FK_Stocks_ToProducts" FromRole="Stock" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="departmentId" Type="Int32" Nullable="false" />
+          <Property Name="usertypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_users_ToDepartments" FromRole="Users" ToRole="Departments" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_users_ToStatuses" FromRole="Users" ToRole="Statuses" />
+          <NavigationProperty Name="Usertype" Relationship="Self.FK_users_ToUsertypes" FromRole="Users" ToRole="Usertypes" />
+          <NavigationProperty Name="Inventories" Relationship="HyperStoreApp.FK_Inventories_ToUsers" FromRole="User" ToRole="Inventory" />
+          <NavigationProperty Name="Sales" Relationship="HyperStoreApp.FK_Sales_ToUsers" FromRole="User" ToRole="Sale" />
+          <NavigationProperty Name="Orders" Relationship="HyperStoreApp.FK_Orders_ToUsers" FromRole="User" ToRole="Order" />
+          <NavigationProperty Name="ForgottenPasswords" Relationship="HyperStoreApp.FK_ForgottenPasswords_ToUsers" FromRole="User" ToRole="ForgottenPassword" />
+        </EntityType>
+        <EntityType Name="Usertype">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_users_ToUsertypes" FromRole="Usertypes" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Vendor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="HyperStoreApp.FK_products_ToVendors" FromRole="Vendor" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="UsersList">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="statusId" />
+            <PropertyRef Name="departmentId" />
+            <PropertyRef Name="usertypeId" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="departmentId" Type="Int32" Nullable="false" />
+          <Property Name="usertypeId" Type="Int32" Nullable="false" />
+          <Property Name="StatusName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="departmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Stocks_ToDepartments">
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Stocks" Type="Self.Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stocks">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_ToDepartments">
+          <End Role="Departments" Type="Self.Department" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_ToStatuses">
+          <End Role="Statuses" Type="Self.Status" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_users_ToUsertypes">
+          <End Role="Usertypes" Type="Self.Usertype" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usertypes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="usertypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="hypermarketEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Statuses" EntityType="Self.Status" />
+          <EntitySet Name="Stocks" EntityType="Self.Stock" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Usertypes" EntityType="Self.Usertype" />
+          <EntitySet Name="Vendors" EntityType="Self.Vendor" />
+          <EntitySet Name="UsersLists" EntityType="Self.UsersList" />
+          <AssociationSet Name="FK_Stocks_ToDepartments" Association="Self.FK_Stocks_ToDepartments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Stocks" EntitySet="Stocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_ToDepartments" Association="Self.FK_users_ToDepartments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_ToStatuses" Association="Self.FK_users_ToStatuses">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_users_ToUsertypes" Association="Self.FK_users_ToUsertypes">
+            <End Role="Usertypes" EntitySet="Usertypes" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="CustomersLists" EntityType="HyperStoreApp.CustomersList" />
+          <EntitySet Name="Customers" EntityType="HyperStoreApp.Customer" />
+          <EntitySet Name="Discounts" EntityType="HyperStoreApp.Discount" />
+          <AssociationSet Name="FK_Customers_ToDiscounts" Association="HyperStoreApp.FK_Customers_ToDiscounts">
+            <End Role="Discount" EntitySet="Discounts" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <EntitySet Name="Inventories" EntityType="HyperStoreApp.Inventory" />
+          <EntitySet Name="InventoryDetails" EntityType="HyperStoreApp.InventoryDetail" />
+          <EntitySet Name="InventoryStatuses" EntityType="HyperStoreApp.InventoryStatus" />
+          <EntitySet Name="OrderDetails" EntityType="HyperStoreApp.OrderDetail" />
+          <EntitySet Name="OrderStatuses" EntityType="HyperStoreApp.OrderStatus" />
+          <EntitySet Name="Sales" EntityType="HyperStoreApp.Sale" />
+          <EntitySet Name="SalesDetails" EntityType="HyperStoreApp.SalesDetail" />
+          <EntitySet Name="SaleStatuses" EntityType="HyperStoreApp.SaleStatus" />
+          <AssociationSet Name="FK_Sales_ToCustomers" Association="HyperStoreApp.FK_Sales_ToCustomers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventories_ToDepartments" Association="HyperStoreApp.FK_Inventories_ToDepartments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Inventory" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventories_ToStatus" Association="HyperStoreApp.FK_Inventories_ToStatus">
+            <End Role="InventoryStatus" EntitySet="InventoryStatuses" />
+            <End Role="Inventory" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Inventories_ToUsers" Association="HyperStoreApp.FK_Inventories_ToUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Inventory" EntitySet="Inventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InventoryDetails_ToInventories" Association="HyperStoreApp.FK_InventoryDetails_ToInventories">
+            <End Role="Inventory" EntitySet="Inventories" />
+            <End Role="InventoryDetail" EntitySet="InventoryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_ToStatuses" Association="HyperStoreApp.FK_Sales_ToStatuses">
+            <End Role="SaleStatus" EntitySet="SaleStatuses" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_ToUsers" Association="HyperStoreApp.FK_Sales_ToUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesDetails_ToSales" Association="HyperStoreApp.FK_SalesDetails_ToSales">
+            <End Role="Sale" EntitySet="Sales" />
+            <End Role="SalesDetail" EntitySet="SalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sales_ToDepartments" Association="HyperStoreApp.FK_Sales_ToDepartments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Sale" EntitySet="Sales" />
+          </AssociationSet>
+          <EntitySet Name="Products" EntityType="HyperStoreApp.Product" />
+          <AssociationSet Name="FK_InventoryDetails_ToProducts" Association="HyperStoreApp.FK_InventoryDetails_ToProducts">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="InventoryDetail" EntitySet="InventoryDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_ToProducts" Association="HyperStoreApp.FK_OrderDetails_ToProducts">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_products_ToVendors" Association="HyperStoreApp.FK_products_ToVendors">
+            <End Role="Vendor" EntitySet="Vendors" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalesDetails_ToProducts" Association="HyperStoreApp.FK_SalesDetails_ToProducts">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="SalesDetail" EntitySet="SalesDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Stocks_ToProducts" Association="HyperStoreApp.FK_Stocks_ToProducts">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Stock" EntitySet="Stocks" />
+          </AssociationSet>
+          <EntitySet Name="Orders" EntityType="HyperStoreApp.Order" />
+          <AssociationSet Name="FK_Orders_ToDepartments" Association="HyperStoreApp.FK_Orders_ToDepartments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_ToOrders" Association="HyperStoreApp.FK_OrderDetails_ToOrders">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToStatuses" Association="HyperStoreApp.FK_Orders_ToStatuses">
+            <End Role="OrderStatus" EntitySet="OrderStatuses" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_ToUsers" Association="HyperStoreApp.FK_Orders_ToUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="ProductsLists" EntityType="HyperStoreApp.ProductsList" />
+          <FunctionImport Name="GetOrderByDepartment" ReturnType="Collection(HyperStoreApp.GetOrderByDepartment_Result)">
+          <Parameter Name="departmentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ForgottenPasswords" EntityType="HyperStoreApp.ForgottenPassword" />
+          <AssociationSet Name="FK_ForgottenPasswords_ToUsers" Association="HyperStoreApp.FK_ForgottenPasswords_ToUsers">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ForgottenPassword" EntitySet="ForgottenPasswords" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CustomersList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="discountId" Type="Int32" Nullable="false" />
+          <Property Name="discountValue" Type="Double" />
+          <Property Name="DiscountName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="discountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Discount" Relationship="HyperStoreApp.FK_Customers_ToDiscounts" FromRole="Customer" ToRole="Discount" />
+          <NavigationProperty Name="Sales" Relationship="HyperStoreApp.FK_Sales_ToCustomers" FromRole="Customer" ToRole="Sale" />
+        </EntityType>
+        <EntityType Name="Discount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="discountValue" Type="Double" />
+          <NavigationProperty Name="Customers" Relationship="HyperStoreApp.FK_Customers_ToDiscounts" FromRole="Discount" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK_Customers_ToDiscounts">
+          <End Type="HyperStoreApp.Discount" Role="Discount" Multiplicity="1" />
+          <End Type="HyperStoreApp.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Discount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="discountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="employeeId" Type="Int32" Nullable="false" />
+          <Property Name="departmentId" Type="Int32" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="HyperStoreApp.FK_Inventories_ToDepartments" FromRole="Inventory" ToRole="Department" />
+          <NavigationProperty Name="InventoryStatus" Relationship="HyperStoreApp.FK_Inventories_ToStatus" FromRole="Inventory" ToRole="InventoryStatus" />
+          <NavigationProperty Name="User" Relationship="HyperStoreApp.FK_Inventories_ToUsers" FromRole="Inventory" ToRole="User" />
+          <NavigationProperty Name="InventoryDetails" Relationship="HyperStoreApp.FK_InventoryDetails_ToInventories" FromRole="Inventory" ToRole="InventoryDetail" />
+        </EntityType>
+        <EntityType Name="InventoryDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="inventoryId" Type="Int32" Nullable="false" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="qtyInStock" Type="Int32" Nullable="false" />
+          <Property Name="qtyActual" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Inventory" Relationship="HyperStoreApp.FK_InventoryDetails_ToInventories" FromRole="InventoryDetail" ToRole="Inventory" />
+          <NavigationProperty Name="Product" Relationship="HyperStoreApp.FK_InventoryDetails_ToProducts" FromRole="InventoryDetail" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="InventoryStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Inventories" Relationship="HyperStoreApp.FK_Inventories_ToStatus" FromRole="InventoryStatus" ToRole="Inventory" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="orderId" Type="Int32" Nullable="false" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" />
+          <Property Name="qtyOrdered" Type="Int32" />
+          <Property Name="qtyReceived" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="HyperStoreApp.FK_OrderDetails_ToProducts" FromRole="OrderDetail" ToRole="Product" />
+          <NavigationProperty Name="Order" Relationship="HyperStoreApp.FK_OrderDetails_ToOrders" FromRole="OrderDetail" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="HyperStoreApp.FK_Orders_ToStatuses" FromRole="OrderStatus" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Sale">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="employeeId" Type="Int32" Nullable="false" />
+          <Property Name="customerId" Type="Int32" Nullable="false" />
+          <Property Name="totalCost" Type="Double" />
+          <Property Name="discount" Type="Int32" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="HyperStoreApp.FK_Sales_ToCustomers" FromRole="Sale" ToRole="Customer" />
+          <NavigationProperty Name="SaleStatus" Relationship="HyperStoreApp.FK_Sales_ToStatuses" FromRole="Sale" ToRole="SaleStatus" />
+          <NavigationProperty Name="User" Relationship="HyperStoreApp.FK_Sales_ToUsers" FromRole="Sale" ToRole="User" />
+          <NavigationProperty Name="SalesDetails" Relationship="HyperStoreApp.FK_SalesDetails_ToSales" FromRole="Sale" ToRole="SalesDetail" />
+          <Property Name="departmentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="HyperStoreApp.FK_Sales_ToDepartments" FromRole="Sale" ToRole="Department" />
+          <Property Name="discountCost" Type="Double" />
+        </EntityType>
+        <EntityType Name="SalesDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="saleId" Type="Int32" Nullable="false" />
+          <Property Name="productId" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Double" />
+          <Property Name="qty" Type="Int32" />
+          <NavigationProperty Name="Sale" Relationship="HyperStoreApp.FK_SalesDetails_ToSales" FromRole="SalesDetail" ToRole="Sale" />
+          <NavigationProperty Name="Product" Relationship="HyperStoreApp.FK_SalesDetails_ToProducts" FromRole="SalesDetail" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="SaleStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sales" Relationship="HyperStoreApp.FK_Sales_ToStatuses" FromRole="SaleStatus" ToRole="Sale" />
+        </EntityType>
+        <Association Name="FK_Sales_ToCustomers">
+          <End Type="HyperStoreApp.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="HyperStoreApp.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="customerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventories_ToDepartments">
+          <End Type="HyperStoreApp.Department" Role="Department" Multiplicity="1" />
+          <End Type="HyperStoreApp.Inventory" Role="Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventories_ToStatus">
+          <End Type="HyperStoreApp.InventoryStatus" Role="InventoryStatus" Multiplicity="1" />
+          <End Type="HyperStoreApp.Inventory" Role="Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InventoryStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Inventories_ToUsers">
+          <End Type="HyperStoreApp.User" Role="User" Multiplicity="1" />
+          <End Type="HyperStoreApp.Inventory" Role="Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Inventory">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InventoryDetails_ToInventories">
+          <End Type="HyperStoreApp.Inventory" Role="Inventory" Multiplicity="1" />
+          <End Type="HyperStoreApp.InventoryDetail" Role="InventoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryDetail">
+              <PropertyRef Name="inventoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_ToStatuses">
+          <End Type="HyperStoreApp.SaleStatus" Role="SaleStatus" Multiplicity="1" />
+          <End Type="HyperStoreApp.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SaleStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_ToUsers">
+          <End Type="HyperStoreApp.User" Role="User" Multiplicity="1" />
+          <End Type="HyperStoreApp.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesDetails_ToSales">
+          <End Type="HyperStoreApp.Sale" Role="Sale" Multiplicity="1" />
+          <End Type="HyperStoreApp.SalesDetail" Role="SalesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sale">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesDetail">
+              <PropertyRef Name="saleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sales_ToDepartments">
+          <End Type="HyperStoreApp.Department" Role="Department" Multiplicity="1" />
+          <End Type="HyperStoreApp.Sale" Role="Sale" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sale">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vendorId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="priceSell" Type="Double" />
+          <Property Name="priceBuy" Type="Double" />
+          <NavigationProperty Name="InventoryDetails" Relationship="HyperStoreApp.FK_InventoryDetails_ToProducts" FromRole="Product" ToRole="InventoryDetail" />
+          <NavigationProperty Name="OrderDetails" Relationship="HyperStoreApp.FK_OrderDetails_ToProducts" FromRole="Product" ToRole="OrderDetail" />
+          <NavigationProperty Name="Vendor" Relationship="HyperStoreApp.FK_products_ToVendors" FromRole="Product" ToRole="Vendor" />
+          <NavigationProperty Name="SalesDetails" Relationship="HyperStoreApp.FK_SalesDetails_ToProducts" FromRole="Product" ToRole="SalesDetail" />
+          <NavigationProperty Name="Stocks" Relationship="HyperStoreApp.FK_Stocks_ToProducts" FromRole="Product" ToRole="Stock" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" ConcurrencyMode="Fixed" />
+        </EntityType>
+        <Association Name="FK_InventoryDetails_ToProducts">
+          <End Type="HyperStoreApp.Product" Role="Product" Multiplicity="1" />
+          <End Type="HyperStoreApp.InventoryDetail" Role="InventoryDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="InventoryDetail">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_ToProducts">
+          <End Type="HyperStoreApp.Product" Role="Product" Multiplicity="1" />
+          <End Type="HyperStoreApp.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_products_ToVendors">
+          <End Type="HyperStoreApp.Vendor" Role="Vendor" Multiplicity="1" />
+          <End Type="HyperStoreApp.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vendor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="vendorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalesDetails_ToProducts">
+          <End Type="HyperStoreApp.Product" Role="Product" Multiplicity="1" />
+          <End Type="HyperStoreApp.SalesDetail" Role="SalesDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalesDetail">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Stocks_ToProducts">
+          <End Type="HyperStoreApp.Product" Role="Product" Multiplicity="1" />
+          <End Type="HyperStoreApp.Stock" Role="Stock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Stock">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="employeeId" Type="Int32" Nullable="false" />
+          <Property Name="departmentId" Type="Int32" Nullable="false" />
+          <Property Name="totalCost" Type="Double" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="HyperStoreApp.FK_Orders_ToDepartments" FromRole="Order" ToRole="Department" />
+          <NavigationProperty Name="OrderDetails" Relationship="HyperStoreApp.FK_OrderDetails_ToOrders" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="OrderStatus" Relationship="HyperStoreApp.FK_Orders_ToStatuses" FromRole="Order" ToRole="OrderStatus" />
+          <NavigationProperty Name="User" Relationship="HyperStoreApp.FK_Orders_ToUsers" FromRole="Order" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Orders_ToDepartments">
+          <End Type="HyperStoreApp.Department" Role="Department" Multiplicity="1" />
+          <End Type="HyperStoreApp.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="departmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_ToOrders">
+          <End Type="HyperStoreApp.Order" Role="Order" Multiplicity="1" />
+          <End Type="HyperStoreApp.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToStatuses">
+          <End Type="HyperStoreApp.OrderStatus" Role="OrderStatus" Multiplicity="1" />
+          <End Type="HyperStoreApp.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="statusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_ToUsers">
+          <End Type="HyperStoreApp.User" Role="User" Multiplicity="1" />
+          <End Type="HyperStoreApp.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="employeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductsList">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="vendorId" />
+            <PropertyRef Name="RowVersion" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="vendorId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="barcode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="priceSell" Type="Double" />
+          <Property Name="priceBuy" Type="Double" />
+          <Property Name="vendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RowVersion" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <ComplexType Name="GetOrderByDepartment_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="DateTime" Name="date" Nullable="false" Precision="23" />
+          <Property Type="Double" Name="totalCost" Nullable="false" />
+          <Property Type="String" Name="fullname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="department" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="status" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="ForgottenPassword">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="accountId" Type="Int32" Nullable="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="HyperStoreApp.FK_ForgottenPasswords_ToUsers" FromRole="ForgottenPassword" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_ForgottenPasswords_ToUsers">
+          <End Type="HyperStoreApp.User" Role="User" Multiplicity="1" />
+          <End Type="HyperStoreApp.ForgottenPassword" Role="ForgottenPassword" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ForgottenPassword">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HyperStoreAppStoreContainer" CdmEntityContainer="hypermarketEntities">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="HyperStoreApp.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="departmentName" ColumnName="departmentName" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="HyperStoreApp.Status">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stocks">
+            <EntityTypeMapping TypeName="HyperStoreApp.Stock">
+              <MappingFragment StoreEntitySet="Stocks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
+                <ScalarProperty Name="qty" ColumnName="qty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HyperStoreApp.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
+                <ScalarProperty Name="usertypeId" ColumnName="usertypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usertypes">
+            <EntityTypeMapping TypeName="HyperStoreApp.Usertype">
+              <MappingFragment StoreEntitySet="Usertypes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendors">
+            <EntityTypeMapping TypeName="HyperStoreApp.Vendor">
+              <MappingFragment StoreEntitySet="Vendors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsersLists">
+            <EntityTypeMapping TypeName="HyperStoreApp.UsersList">
+              <MappingFragment StoreEntitySet="UsersList">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
+                <ScalarProperty Name="usertypeId" ColumnName="usertypeId" />
+                <ScalarProperty Name="StatusName" ColumnName="StatusName" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="departmentName" ColumnName="departmentName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomersLists">
+            <EntityTypeMapping TypeName="HyperStoreApp.CustomersList">
+              <MappingFragment StoreEntitySet="CustomersList">
+                <ScalarProperty Name="DiscountName" ColumnName="DiscountName" />
+                <ScalarProperty Name="discountValue" ColumnName="discountValue" />
+                <ScalarProperty Name="discountId" ColumnName="discountId" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="HyperStoreApp.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="discountId" ColumnName="discountId" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Discounts">
+            <EntityTypeMapping TypeName="HyperStoreApp.Discount">
+              <MappingFragment StoreEntitySet="Discounts">
+                <ScalarProperty Name="discountValue" ColumnName="discountValue" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventories">
+            <EntityTypeMapping TypeName="HyperStoreApp.Inventory">
+              <MappingFragment StoreEntitySet="Inventories">
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryDetails">
+            <EntityTypeMapping TypeName="HyperStoreApp.InventoryDetail">
+              <MappingFragment StoreEntitySet="InventoryDetails">
+                <ScalarProperty Name="qtyActual" ColumnName="qtyActual" />
+                <ScalarProperty Name="qtyInStock" ColumnName="qtyInStock" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="inventoryId" ColumnName="inventoryId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InventoryStatuses">
+            <EntityTypeMapping TypeName="HyperStoreApp.InventoryStatus">
+              <MappingFragment StoreEntitySet="InventoryStatuses">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="HyperStoreApp.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="qtyReceived" ColumnName="qtyReceived" />
+                <ScalarProperty Name="qtyOrdered" ColumnName="qtyOrdered" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatuses">
+            <EntityTypeMapping TypeName="HyperStoreApp.OrderStatus">
+              <MappingFragment StoreEntitySet="OrderStatuses">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sales">
+            <EntityTypeMapping TypeName="HyperStoreApp.Sale">
+              <MappingFragment StoreEntitySet="Sales">
+                <ScalarProperty Name="discountCost" ColumnName="discountCost" />
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="totalCost" ColumnName="totalCost" />
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesDetails">
+            <EntityTypeMapping TypeName="HyperStoreApp.SalesDetail">
+              <MappingFragment StoreEntitySet="SalesDetails">
+                <ScalarProperty Name="qty" ColumnName="qty" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="saleId" ColumnName="saleId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleStatuses">
+            <EntityTypeMapping TypeName="HyperStoreApp.SaleStatus">
+              <MappingFragment StoreEntitySet="SaleStatuses">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="HyperStoreApp.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="priceBuy" ColumnName="priceBuy" />
+                <ScalarProperty Name="priceSell" ColumnName="priceSell" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="HyperStoreApp.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="totalCost" ColumnName="totalCost" />
+                <ScalarProperty Name="departmentId" ColumnName="departmentId" />
+                <ScalarProperty Name="employeeId" ColumnName="employeeId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductsLists">
+            <EntityTypeMapping TypeName="HyperStoreApp.ProductsList">
+              <MappingFragment StoreEntitySet="ProductsList">
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="vendorName" ColumnName="vendorName" />
+                <ScalarProperty Name="priceBuy" ColumnName="priceBuy" />
+                <ScalarProperty Name="priceSell" ColumnName="priceSell" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="barcode" ColumnName="barcode" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="vendorId" ColumnName="vendorId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetOrderByDepartment" FunctionName="HyperStoreApp.Store.Sp_GetOrderByDepartment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HyperStoreApp.GetOrderByDepartment_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="totalCost" ColumnName="totalCost" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ForgottenPasswords">
+            <EntityTypeMapping TypeName="HyperStoreApp.ForgottenPassword">
+              <MappingFragment StoreEntitySet="ForgottenPasswords">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

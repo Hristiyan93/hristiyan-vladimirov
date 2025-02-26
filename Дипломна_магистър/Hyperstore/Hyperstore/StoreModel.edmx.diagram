@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="659fca1f2cb74bb5a982189c45978777" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="HyperStoreApp.Department" Width="1.5" PointX="1.125" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.Status" Width="1.5" PointX="1" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.Stock" Width="1.5" PointX="6.375" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.User" Width="1.5" PointX="0.875" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.Usertype" Width="1.5" PointX="1" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.Vendor" Width="1.5" PointX="1.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.UsersList" Width="1.5" PointX="9.75" PointY="2.75" IsExpanded="true" />
+        <AssociationConnector Association="HyperStoreApp.FK_Stocks_ToDepartments" ManuallyRouted="false" />
+        <AssociationConnector Association="HyperStoreApp.FK_users_ToDepartments" ManuallyRouted="false" />
+        <AssociationConnector Association="HyperStoreApp.FK_users_ToStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="HyperStoreApp.FK_users_ToUsertypes" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HyperStoreApp.CustomersList" Width="1.5" PointX="10.625" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.Customer" Width="1.5" PointX="3.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.Discount" Width="1.5" PointX="3.25" PointY="14.5" IsExpanded="true" />
+        <AssociationConnector Association="HyperStoreApp.FK_Customers_ToDiscounts" />
+        <EntityTypeShape EntityType="HyperStoreApp.Inventory" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.InventoryDetail" Width="1.5" PointX="10.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.InventoryStatus" Width="1.5" PointX="6.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.OrderDetail" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.OrderStatus" Width="1.5" PointX="3.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.Sale" Width="1.5" PointX="6.125" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.SalesDetail" Width="1.5" PointX="8.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.SaleStatus" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
+        <AssociationConnector Association="HyperStoreApp.FK_Sales_ToCustomers" />
+        <AssociationConnector Association="HyperStoreApp.FK_Inventories_ToDepartments" />
+        <AssociationConnector Association="HyperStoreApp.FK_Inventories_ToStatus" />
+        <AssociationConnector Association="HyperStoreApp.FK_Inventories_ToUsers" />
+        <AssociationConnector Association="HyperStoreApp.FK_InventoryDetails_ToInventories" />
+        <AssociationConnector Association="HyperStoreApp.FK_Sales_ToStatuses" />
+        <AssociationConnector Association="HyperStoreApp.FK_Sales_ToUsers" />
+        <AssociationConnector Association="HyperStoreApp.FK_SalesDetails_ToSales" />
+        <AssociationConnector Association="HyperStoreApp.FK_Sales_ToDepartments" />
+        <EntityTypeShape EntityType="HyperStoreApp.Product" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="HyperStoreApp.FK_InventoryDetails_ToProducts" />
+        <AssociationConnector Association="HyperStoreApp.FK_OrderDetails_ToProducts" />
+        <AssociationConnector Association="HyperStoreApp.FK_products_ToVendors" />
+        <AssociationConnector Association="HyperStoreApp.FK_SalesDetails_ToProducts" />
+        <AssociationConnector Association="HyperStoreApp.FK_Stocks_ToProducts" />
+        <EntityTypeShape EntityType="HyperStoreApp.Order" Width="1.5" PointX="3.625" PointY="5" IsExpanded="true" />
+        <AssociationConnector Association="HyperStoreApp.FK_Orders_ToDepartments" />
+        <AssociationConnector Association="HyperStoreApp.FK_OrderDetails_ToOrders" />
+        <AssociationConnector Association="HyperStoreApp.FK_Orders_ToStatuses" />
+        <AssociationConnector Association="HyperStoreApp.FK_Orders_ToUsers" />
+        <EntityTypeShape EntityType="HyperStoreApp.ProductsList" Width="1.5" PointX="11.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HyperStoreApp.ForgottenPassword" Width="1.5" PointX="1" PointY="16.375" />
+        <AssociationConnector Association="HyperStoreApp.FK_ForgottenPasswords_ToUsers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
